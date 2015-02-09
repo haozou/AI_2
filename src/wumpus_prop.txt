@@ -1,0 +1,26 @@
+assign(max_seconds, 1).
+formulas(sos).
+all X1 all Y1 all X2 all Y2 (neighbor(X1,Y1,X2,Y2) <-> (((X1=X2) & closey(Y1,Y2)) | (closex(X1,X2) & (Y1=Y2)))).
+all X1 all Y1 all X2 all Y2 ((-stench(X1,Y1) & neighbor(X1, Y1, X2, Y2))-> -wumpus(X2, Y2)).
+all X1 all Y1 all X2 all Y2 ((-breeze(X1,Y1) & neighbor(X1, Y1, X2, Y2))-> -pit(X2, Y2)).
+all X1 all Y1 (breeze(X1,Y1) -> (exists X2 exists Y2 (pit(X2,Y2) & neighbor(X1, Y1, X2, Y2)))).
+all X1 all Y1 (stench(X1,Y1) -> (exists X2 exists Y2 (wumpus(X2,Y2) & neighbor(X1, Y1, X2, Y2)))).
+%all X all Y (boundary(X,Y)-> -wumpus(X,Y) & -pit(X,Y)).
+%all X1 all Y1 ((-stench(X1,Y1))-> -wumpus(X1,Y1)).
+%all X1 all Y1 ((-breeze(X1,Y1))-> -pit(X1,Y1)).
+all X1 all Y1 ((glitter(X1,Y1))-> gold(X1,Y1)).
+all X (closex(1,X) <-> X=2).
+all X (closex(2,X) <-> X=1 | X=3).
+all X (closex(3,X) <-> X=2 | X=4).
+all X (closex(4,X) <-> X=3 | X=5).
+all X (closex(5,X) <-> X=4).
+all Y (closey(1,Y) <-> Y=2).
+all Y (closey(2,Y) <-> Y=1 | Y=3).
+all Y (closey(3,Y) <-> Y=2 | Y=4).
+all Y (closey(4,Y) <-> Y=3).
+-stench(1,1).
+-breeze(1,1).
+end_of_list.
+formulas(goals).
+-wumpus(2,6).
+end_of_list.

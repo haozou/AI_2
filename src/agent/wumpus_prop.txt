@@ -1,0 +1,17 @@
+assign(max_seconds, 60).
+formulas(assumptions).
+all x all y ((wumpus(x) & neighbor(x, y))-> stench(y)).
+all x all y ((pit(x) & neighbor(x, y))-> breeze(y)).
+all x all y ((-stench(x) & neighbor(x, y))-> -wumpus(y)).
+all x all y ((-breeze(x) & neighbor(x, y))-> -pit(y)).
+all x ((-stench(x))-> -wumpus(x)).
+all x ((-breeze(x))-> -pit(x)).
+all x ((glitter(x))-> gold(x)).
+-stench(11).
+-breeze(11).
+neighbor(11,12).
+neighbor(11,21).
+end_of_list.
+formulas(goals).
+-pit(21).
+end_of_list.
